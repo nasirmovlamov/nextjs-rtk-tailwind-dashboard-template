@@ -56,6 +56,7 @@ export default function Login() {
           right: 0,
           bottom: 0,
           backgroundImage: `url(${armyBg.src})`,
+          backdropFilter: 'blur(10px)'
         }}
       ></div>
       <div

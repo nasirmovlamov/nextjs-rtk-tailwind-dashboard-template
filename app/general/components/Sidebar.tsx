@@ -1,25 +1,32 @@
 "use client";
 
-import mnLogo from "../../assets/images/mnlogo.png";
 import {
   ArrowLeftEndOnRectangleIcon,
+  BuildingLibraryIcon,
+  BuildingOffice2Icon,
   ListBulletIcon,
   PlusCircleIcon,
-  UsersIcon, // Replace GroupIcon
+  RadioIcon,
+  RectangleGroupIcon,
 } from "@heroicons/react/24/solid"; // Example using Heroicons
 import Image from "next/image";
-import Dropdown from "./Dropdown";
 import Link from "next/link";
+import mnLogo from "../../assets/images/mnlogo.png";
+import Dropdown from "./Dropdown";
+import { useAppDispatch, useAppSelector } from "@/app/redux/hooks";
 
 export default function Sidebar() {
+  const appData = useAppSelector((state) => state.app);
+  const dispatch = useAppDispatch();
+  const toggleSidebar = () => {};
   const logout = async () => {
     window.location.href = "/";
   };
 
   return (
     <div
-      className={`w-[280px] h-screen border-r border-lightgray p-5 box-border flex flex-col justify-between fixed text-white bg-[#2b353d] border-none transition-all duration-500 ${
-        false ? "-translate-x-[390px]" : "translate-x-0"
+      className={` mt-2 font-medium ml-4 w-[260px] rounded-lg h-[calc(100vh-15px)] border-r border-lightgray p-3 box-border flex flex-col justify-between fixed text-white bg-[#2b353dcd] shadow-lg border-none transition-all duration-500 ${
+        appData.sidebar.isVisible ? `-translate-x-[290px]` : "translate-x-0"
       }`}
     >
       <Link href="/">
@@ -34,35 +41,70 @@ export default function Sidebar() {
       </Link>
 
       <div className="flex flex-col h-[80vh]">
-        <div className="box-border pt-10 text-lg">
+        <div className="box-border pt-10 text-xs">
           <Dropdown
-            title="İstifadəçilər"
-            icon={<UsersIcon className="h-6 w-6" />}
+            title="Korpuslar"
+            icon={<BuildingLibraryIcon className="h-6 w-6" />}
             items={[
               {
-                label: "Siyahısı",
-                route: "/users",
+                label: "siyahısı",
+                route: "/corps",
                 icon: <ListBulletIcon className="h-5 w-5" />, // If you have an icon
               },
               {
-                label: "Yarat",
-                route: "/users/create",
+                label: "əlavə et",
+                route: "/corps/create",
                 icon: <PlusCircleIcon className="h-5 w-5" />, // If you have an icon
               },
             ]}
           />
+
           <Dropdown
-            title="İstifadəçilər2"
-            icon={<UsersIcon className="h-6 w-6" />}
+            title="Hərbi hissələr"
+            icon={<BuildingOffice2Icon className="h-6 w-6" />}
             items={[
               {
-                label: "Siyahısı2",
-                route: "/users2",
+                label: "siyahısı",
+                route: "/brigades",
                 icon: <ListBulletIcon className="h-5 w-5" />, // If you have an icon
               },
               {
-                label: "Yarat2",
-                route: "/users2/create",
+                label: "əlavə et",
+                route: "/brigades/create",
+                icon: <PlusCircleIcon className="h-5 w-5" />, // If you have an icon
+              },
+            ]}
+          />
+
+          <Dropdown
+            title="Qruplar"
+            icon={<RectangleGroupIcon className="h-6 w-6" />}
+            items={[
+              {
+                label: "siyahısı",
+                route: "/groups",
+                icon: <ListBulletIcon className="h-5 w-5" />, // If you have an icon
+              },
+              {
+                label: "əlavə et",
+                route: "/groups/create",
+                icon: <PlusCircleIcon className="h-5 w-5" />, // If you have an icon
+              },
+            ]}
+          />
+
+          <Dropdown
+            title="Vəsaitlər"
+            icon={<RadioIcon className="h-6 w-6" />}
+            items={[
+              {
+                label: "siyahısı",
+                route: "/supplies",
+                icon: <ListBulletIcon className="h-5 w-5" />, // If you have an icon
+              },
+              {
+                label: "əlavə et",
+                route: "/supplies/create",
                 icon: <PlusCircleIcon className="h-5 w-5" />, // If you have an icon
               },
             ]}
@@ -71,9 +113,9 @@ export default function Sidebar() {
 
         <div className="w-full h-[0.5px] bg-[#d3d3d330] mt-auto"></div>
 
-        <div className="flex flex-col mt-5">
+        <div className="flex flex-col mt-2 mb-4">
           <button
-            className="text-white w-full text-left flex gap-5 items-center px-4 py-2 rounded-md hover:bg-[#97979720]"
+            className="text-white w-full text-left flex gap-5 items-center px-2 py-2 rounded-md hover:bg-[#97979720]"
             onClick={logout}
           >
             <ArrowLeftEndOnRectangleIcon className="h-6 w-6" />
@@ -82,7 +124,7 @@ export default function Sidebar() {
         </div>
       </div>
 
-      <span className="text-xs text-center">
+      <span className="text-[11px] text-center">
         Copyright © Proqram təminatı şöbəsi 2025
       </span>
     </div>

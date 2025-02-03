@@ -7,6 +7,7 @@ import Wrapper from "./general/components/Wrapper";
 import Sidebar from "./general/components/Sidebar";
 import Head from "next/head";
 import Header from "./general/components/Header";
+import MainContent from "./general/MainContent";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,7 +43,9 @@ export default function RootLayout({
         <Wrapper>
           <Sidebar />
           <Header />
+          <MainContent>
           {children}
+          </MainContent>
         </Wrapper>
       </body>
     </html>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import DarkModeButton from "./DarkModeButton";
 // import DarkModeButton from "./DarkModeButton"; // Make sure these components are available
 
 const Header = () => {
@@ -11,12 +12,12 @@ const Header = () => {
   //   };
 
   return (
-    <header className="ml-[280px] w-[calc(100%-280px)]  flex justify-between  bg-white dark:bg-gray-900 p-4 shadow-md">
+    <div className=" absolute mt-3 rounded-lg text-white ml-[300px] w-[calc(100%-320px)] flex justify-between drop-shadow-md p-4 bg-[#2b353db9]">
       <div className="flex items-center">
         <div className="flex items-center gap-1">
           <div className="w-1 h-6 bg-orange-500 mr-2 rounded-sm"> </div>{" "}
-          <span className="text-xl font-medium text-gray-800 dark:text-white">
-            Rabitə Vasitələrinin İdarə Etmə Proqram Təminatı
+          <span className="text-xl font-medium ">
+            Rabitə Vasitələrinin Uçotu Proqram Təminatı
           </span>
         </div>
       </div>
@@ -27,11 +28,12 @@ const Header = () => {
             <div className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-white font-medium">
               A
             </div>
-            <span className="text-gray-800 dark:text-white">Adminov</span>
+            <span className="">Admin</span>
           </Link>
         )}
+        {/* <DarkModeButton /> */}
       </div>
-    </header>
+    </div>
   );
 };
 
