@@ -1,0 +1,66 @@
+'use client'
+import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
+import { useState } from "react";
+import { ReactNode } from "react"; // Import ReactNode
+
+interface DropdownChild {
+  label: string;
+  route: string;
+  icon?: ReactNode;
+  onClick?: () => void;
+}
+
+interface DropdownProps {
+  title: string;
+  items?: DropdownChild[];
+  icon?: ReactNode;
+  route?: string;
+}
+
+export default function Dropdown({ title, items, icon, route }: DropdownProps) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <div className="box-border text-lg">
+      <button
+        className={`w-full text-left flex justify-between items-center gap-5 text-lg text-white 
+          ${route ? (location.pathname === route ? "bg-[#97979770]" : "") : ""}
+          px-4 py-2 rounded-md hover:bg-[#97979720]`}
+        onClick={items ? toggleDropdown : () => {}}
+      >
+        <div className="flex gap-5 items-center">
+          {icon && icon}
+          <span>{title}</span>
+        </div>
+        {items &&
+          (isOpen ? (
+            <ChevronDownIcon className="h-5 w-5" />
+          ) : (
+            <ChevronRightIcon className="h-5 w-5" />
+          ))}
+      </button>
+
+      {isOpen && items && (
+        <div>
+          {items.map((child, index) => (
+            <Link
+              key={index}
+              href={child.route}
+              className={`w-full text-left flex gap-5 items-center h-10 px-6 text-white mt-1 
+                ${location.pathname === child.route ? "bg-[#97979770]" : ""}
+                hover:bg-[#97979720] rounded-md`}
+            >
+              {child.icon && child.icon}
+              <span>{child.label}</span>
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
