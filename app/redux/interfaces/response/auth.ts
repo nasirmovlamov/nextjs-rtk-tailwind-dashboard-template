@@ -1,15 +1,15 @@
 import { IUser } from "../general/auth";
 
 export interface ResponseLogin {
-  access_token: string;
-  refresh_token: string;
-  user: IUser;
+  data: {
+    accessToken: string;
+    refreshToken: string;
+    user: IUser;
+  };
 }
 
 export interface ResponseAuth {
-  access_token: string;
-  refresh_token: string;
-  user: IUser;
+  data: IUser;
 }
 
 export interface ResponseLogout {

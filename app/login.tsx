@@ -1,48 +1,18 @@
 "use client";
-import { useState } from "react";
+import { useForm } from "react-hook-form";
 import armyBg from "../public/army-bg.jpg";
+import { authApi } from "./redux/apis/AuthApi";
+import { RequestLogin } from "./redux/interfaces/request/auth";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [error, setError] = useState<any>(null);
-  const [loading, setLoading] = useState(false);
+  const [login, { error, isLoading }] = authApi.useLoginMutation();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null); // Clear any previous errors
+  // React Hook Form setup
+  const { handleSubmit, register } = useForm();
 
-    try {
-      // Simulate API call (replace with your actual login logic)
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const response: any = await new Promise((resolve) => {
-        setTimeout(() => {
-          if (email === "test@example.com" && password === "password") {
-            resolve({ success: true }); // Successful login
-          } else {
-            resolve({ success: false, message: "Invalid credentials" });
-          }
-        }, 1500); // Simulate 1.5-second delay
-      });
-
-      if (response.success) {
-        // Store authentication token or user info (e.g., using cookies or localStorage)
-        localStorage.setItem("isAuthenticated", "true"); // Example
-        // router.push("/dashboard"); // Redirect to dashboard or protected page
-      } else {
-        setError(response.message || "Login failed");
-      }
-    } catch (err) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      setError("An error occurred during login.");
-      console.error("Login Error:", err); // Log the error for debugging
-    } finally {
-      setLoading(false);
-    }
+  // Form submission handler
+  const onSubmit = async (data: RequestLogin) => {
+    await login(data);
   };
 
   return (
@@ -50,22 +20,10 @@ export default function Login() {
       <div
         className="absolute -z-10 left-0 top-0 w-full h-full bg-center"
         style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
           backgroundImage: `url(${armyBg.src})`,
-          backdropFilter: 'blur(10px)'
         }}
       ></div>
-      <div
-        style={{
-          backgroundColor: "rgba(0, 0, 0, 0.4)",
-          backdropFilter: "blur(5px)",
-        }}
-        className="min-h-screen  z-20 flex flex-col justify-center py-12 sm:px-6 lg:px-8"
-      >
+      <div className="bg-[#00000066] backdrop-blur min-h-screen  z-20 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white p-10 shadow sm:rounded-lg sm:px-10">
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -73,24 +31,22 @@ export default function Login() {
                 Daxil ol
               </h2>
             </div>
-            <form className="space-y-6 mt-6" onSubmit={handleSubmit}>
+            <form className="space-y-6 mt-6" onSubmit={handleSubmit(onSubmit)}>
               <div>
                 <label
                   htmlFor="email"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Elektron poçt
+                  İstifadəçi adı
                 </label>
                 <div className="mt-1">
                   <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
+                    id="username"
+                    type="username"
+                    autoComplete="username"
                     required
                     className="appearance-none relative block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    {...register("username")}
                   />
                 </div>
               </div>
@@ -105,30 +61,28 @@ export default function Login() {
                 <div className="mt-1">
                   <input
                     id="password"
-                    name="password"
                     type="password"
                     autoComplete="current-password"
                     required
                     className="appearance-none relative block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    {...register("password")}
                   />
                 </div>
               </div>
 
-              {error && <div className="text-red-500 text-sm">{error}</div>}
+              {error && <div className="text-red-500 text-sm">{error?.data?.message}</div>}
 
               <div>
                 <button
                   type="submit"
-                  disabled={loading} // Disable button while loading
+                  disabled={isLoading} // Disable button while isLoading
                   className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md font-medium ${
-                    loading
-                      ? "bg-gray-400 cursor-not-allowed" // Style for loading state
+                    isLoading
+                      ? "bg-gray-400 cursor-not-allowed" // Style for isLoading state
                       : "bg-indigo-600 hover:bg-indigo-700 text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   }`}
                 >
-                  {loading ? (
+                  {isLoading ? (
                     <svg
                       className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
                       xmlns="http://www.w3.org/2000/svg"

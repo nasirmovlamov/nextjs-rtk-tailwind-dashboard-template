@@ -1,7 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { axiosBaseQuery } from "../hooks";
 import { ENDPOINTS } from "@/app/consts/endpoints/endpoints";
-import { IGroup } from "../interfaces/request/group";
+import { IGroup } from "../interfaces/general/group";
 
 export const groupsApi = createApi({
   reducerPath: "usersApi",

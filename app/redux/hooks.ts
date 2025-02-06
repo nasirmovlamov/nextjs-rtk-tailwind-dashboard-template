@@ -1,3 +1,4 @@
+"use client";
 import {
   AxiosError,
   AxiosResponse,
@@ -12,11 +13,11 @@ import type { RootState, AppDispatch } from "./store";
 
 export const createAxiosInstance = ({ baseUrl }: { baseUrl: string }) => {
   // Check for access token in localStorage (or other storage mechanisms like sessionStorage)
-  const access_token = getCookie("access_token");
+  const accessToken = getCookie("accessToken");
 
   // Prepare headers with Bearer token if available
   const finalHeaders = {
-    ...(access_token && { Authorization: `Bearer ${access_token}` }),
+    ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
   };
 
   // Create Axios instance with base URL
@@ -28,7 +29,7 @@ export const createAxiosInstance = ({ baseUrl }: { baseUrl: string }) => {
   // Request Interceptor
   axiosInstance.interceptors.request.use(
     (config) => {
-      const token = getCookie("access_token");
+      const token = getCookie("accessToken");
       if (token) {
         config = {
           ...config,
@@ -50,14 +51,14 @@ export const createAxiosInstance = ({ baseUrl }: { baseUrl: string }) => {
   // Response Interceptor
   axiosInstance.interceptors.response.use(
     (response: AxiosResponse) => {
-      if (response.data?.access_token) {
-        setCookie("access_token", response.data?.access_token, 1);
+      if (response.data?.data?.accessToken) {
+        setCookie("accessToken", response.data?.data?.accessToken, 1);
       }
-      if (response.data?.refresh_token) {
-        setCookie("refresh_token", response.data?.refresh_token, 1);
+      if (response.data?.data?.refreshToken) {
+        setCookie("refreshToken", response.data?.data?.refreshToken, 1);
       }
-      if (response.data?.user) {
-        setCookie("user", JSON.stringify(response.data?.user), 1);
+      if (response.data?.data?.user) {
+        setCookie("user", JSON.stringify(response.data?.data?.user), 1);
       }
 
       return response;
@@ -69,13 +70,13 @@ export const createAxiosInstance = ({ baseUrl }: { baseUrl: string }) => {
           // Do nothing or display a custom error message
           return;
         } else {
-          window.location.href = "/401";
+          // window.location.href = "/401";
         }
 
         // Handle token refresh, logout, etc.
       } else if (error.response?.status === 500) {
         // Example: Show a generic error message for server issues
-        console.error("Server error, please try again later.");
+        // console.error("Server error, please try again later.");
       }
       return Promise.reject(error);
     }

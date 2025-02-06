@@ -8,19 +8,23 @@ import {
   PlusCircleIcon,
   RadioIcon,
   RectangleGroupIcon,
+  UsersIcon,
 } from "@heroicons/react/24/solid"; // Example using Heroicons
 import Image from "next/image";
 import Link from "next/link";
 import mnLogo from "../../assets/images/mnlogo.png";
 import Dropdown from "./Dropdown";
 import { useAppDispatch, useAppSelector } from "@/app/redux/hooks";
+import { AuthSlice } from "@/app/redux/slices/AuthSlice";
+import { authApi } from "@/app/redux/apis/AuthApi";
 
 export default function Sidebar() {
   const appData = useAppSelector((state) => state.app);
   const dispatch = useAppDispatch();
-  const toggleSidebar = () => {};
-  const logout = async () => {
-    window.location.href = "/";
+  const [logout] = authApi.useLogoutMutation();
+  const toggleLogout = async () => {
+    await logout();
+    dispatch(AuthSlice.actions.setUnAuth());
   };
 
   return (
@@ -42,6 +46,23 @@ export default function Sidebar() {
 
       <div className="flex flex-col h-[80vh]">
         <div className="box-border pt-10 text-xs">
+          <Dropdown
+            title="İstifadəçilər"
+            icon={<UsersIcon className="h-6 w-6" />}
+            items={[
+              {
+                label: "siyahısı",
+                route: "/users",
+                icon: <ListBulletIcon className="h-5 w-5" />, // If you have an icon
+              },
+              {
+                label: "əlavə et",
+                route: "/users/create",
+                icon: <PlusCircleIcon className="h-5 w-5" />, // If you have an icon
+              },
+            ]}
+          />
+
           <Dropdown
             title="Korpuslar"
             icon={<BuildingLibraryIcon className="h-6 w-6" />}
@@ -116,7 +137,7 @@ export default function Sidebar() {
         <div className="flex flex-col mt-2 mb-4">
           <button
             className="text-white w-full text-left flex gap-5 items-center px-2 py-2 rounded-md hover:bg-[#97979720]"
-            onClick={logout}
+            onClick={toggleLogout}
           >
             <ArrowLeftEndOnRectangleIcon className="h-6 w-6" />
             <span>Tərk et</span>

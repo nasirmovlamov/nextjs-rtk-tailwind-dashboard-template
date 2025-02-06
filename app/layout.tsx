@@ -1,13 +1,10 @@
-import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 // import { Provider } from "react-redux";
 import Wrapper from "./general/components/Wrapper";
 // import Sidebar from "./general/components/Sidebar";
-import Sidebar from "./general/components/Sidebar";
 import Head from "next/head";
-import Header from "./general/components/Header";
-import MainContent from "./general/MainContent";
+import AuthHandler from "./general/components/AuthHandler";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,12 +15,6 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
-
-export const metadata: Metadata = {
-  title: "MN | Rabitə Təminatı Vasitələrinin İdarə Olunması Proqram Təminatı",
-  description:
-    "MN | Rabitə Təminatı Vasitələrinin İdarə Olunması Proqram Təminatı",
-};
 
 export default function RootLayout({
   children,
@@ -41,11 +32,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Wrapper>
-          <Sidebar />
-          <Header />
-          <MainContent>
-          {children}
-          </MainContent>
+          <AuthHandler>{children}</AuthHandler>
         </Wrapper>
       </body>
     </html>

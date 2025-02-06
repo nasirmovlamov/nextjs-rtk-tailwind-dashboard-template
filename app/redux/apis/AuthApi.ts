@@ -4,6 +4,10 @@ import { ENDPOINTS } from "@/app/consts/endpoints/endpoints";
 import { axiosBaseQuery } from "../hooks";
 import { ResponseAuth, ResponseLogin } from "../interfaces/response/auth";
 import { RequestLogin } from "../interfaces/request/auth";
+import { getCookie } from "@/app/utils/getCookie";
+import { IUser } from "../interfaces/general/auth";
+import { setCookie } from "@/app/utils/setCookie";
+import { deleteCookie } from "@/app/utils/deleteCookie";
 
 export const authApi = createApi({
   reducerPath: "authApi",
@@ -13,7 +17,7 @@ export const authApi = createApi({
   endpoints: (builder) => ({
     login: builder.mutation<ResponseLogin, RequestLogin>({
       query: (data: RequestLogin) => ({
-        url: "/login",
+        url: "auth/login",
         method: "POST",
         data,
       }),
@@ -21,30 +25,32 @@ export const authApi = createApi({
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
-
           // Update auth state (example using Redux Toolkit)
           dispatch(AuthSlice.actions.setAuth(data));
         } catch (err) {
           console.warn(err);
           // Handle login error (e.g., dispatch authSlice.actions.loginFailure)
           dispatch(AuthSlice.actions.setUnAuth());
+          deleteCookie("accessToken");
+          deleteCookie("refreshToken");
+          deleteCookie("user");
         }
       },
     }),
 
     logout: builder.mutation<unknown, void>({
       query: () => ({
-        url: "/logout",
-        method: "GET",
+        url: "auth/logout",
+        method: "POST",
       }),
     }),
 
     refreshToken: builder.mutation<ResponseLogin, string>({
       query: (token) => ({
-        url: "/refresh",
+        url: "auth/refresh",
         method: "POST",
         data: {
-          refresh_token: token,
+          refreshToken: token,
         },
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
@@ -53,6 +59,7 @@ export const authApi = createApi({
 
           // Update auth state (example using Redux Toolkit)
           dispatch(AuthSlice.actions.setAuth(data));
+          // window.location.href = '/'
         } catch (err) {
           console.warn(err);
           // Handle login error (e.g., dispatch authSlice.actions.loginFailure)
@@ -64,19 +71,35 @@ export const authApi = createApi({
 
     getUser: builder.query<ResponseAuth, void>({
       query: () => ({
-        url: "/user",
-        method: "GET",
+        url: "auth/verify-token",
+        method: "POST",
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
-
           // Update auth state (example using Redux Toolkit)
-          dispatch(AuthSlice.actions.setAuth(data));
+          const accessToken = getCookie("accessToken");
+          const refreshToken = getCookie("accessToken");
+          const user: IUser = data?.data;
+          if (accessToken && refreshToken && user) {
+            dispatch(
+              AuthSlice.actions.setAuth({
+                data: {
+                  accessToken: accessToken,
+                  refreshToken: refreshToken,
+                  user: user,
+                },
+              })
+            );
+            setCookie("user", JSON.stringify(data.data), 1);
+          }
         } catch (err) {
-          console.warn(err);
+          
+          window.location.href = "/401";
+          console.log(err);
+          // redirect("/401");
           // Handle login error (e.g., dispatch authSlice.actions.loginFailure)
-          dispatch(AuthSlice.actions.setUnAuth());
+          // dispatch(AuthSlice.actions.setUnAuth());
         }
       },
       providesTags: ["auth"],

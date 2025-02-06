@@ -27,7 +27,6 @@ export default function Dropdown({ title, items, icon, route }: DropdownProps) {
     setIsOpen(!isOpen);
   };
 
-  console.log(pathname)
 
   return (
     <div className="box-border text-lg">

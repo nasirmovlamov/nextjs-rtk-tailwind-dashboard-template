@@ -5,5 +5,5 @@ export default function MainContent({
 }: {
   children: ReactNode;
 }) {
-  return <div className="pt-20 p-4 ml-[280px] h-[calc(100vh-72px)] w-[calc(100%-280px)] ">{children}</div>;
+  return <div className="pt-24 p-4 ml-[285px] h-[calc(100vh-72px)] w-[calc(100%-290px)]">{children}</div>;
 }
