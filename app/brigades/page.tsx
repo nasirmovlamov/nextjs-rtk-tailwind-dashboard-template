@@ -1,14 +1,11 @@
-"use client";
-import { EyeIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
-import TableSkeleton from "../general/components/TableSkeleton";
-import { useRouter } from "next/navigation";
-import { brigadesApi } from "../redux/apis/BrigadesApi";
-import { PaginationHandler } from "../general/components/PaginationHandler";
-import { useEffect } from "react";
+'use client';
+import { useEffect } from 'react';
+import { ActionButtonsForTable } from '../general/components/ActionButtonsForTable';
+import { PaginationHandler } from '../general/components/PaginationHandler';
+import TableSkeleton from '../general/components/TableSkeleton';
+import { brigadesApi } from '../redux/apis/BrigadesApi';
 
 export default function Brigades() {
-  const router = useRouter();
-
   const [getBrigades, { data: response, isLoading: isLoadingGetBrigades }] =
     brigadesApi.useLazyGetBrigadesQuery();
   const [deleteBrigade] = brigadesApi.useDeleteBrigadesMutation();
@@ -18,7 +15,7 @@ export default function Brigades() {
   };
 
   useEffect(() => {
-    getBrigades();
+    getBrigades(1);
   }, []);
 
   return (
@@ -28,14 +25,10 @@ export default function Brigades() {
           <thead className="bg-[#2b353df7]">
             <tr>
               <th className="p-4  ">
-                <p className="block font-sans text-sm antialiased  leading-none font-bold ">
-                  Adı
-                </p>
+                <p className="block font-sans text-sm antialiased  leading-none font-bold ">Adı</p>
               </th>
               <th className="p-4  ">
-                <p className="block font-sans text-sm antialiased  leading-none font-bold ">
-                  Kodu
-                </p>
+                <p className="block font-sans text-sm antialiased  leading-none font-bold ">Kodu</p>
               </th>
 
               <th className="p-4  ">
@@ -65,42 +58,12 @@ export default function Brigades() {
                 <p className="block">23/04/18</p>
               </td> */}
                 <td className="p-4 border-b border-gray-600">
-                  <div className="flex gap-x-4">
-                    <button
-                      className="w-5 h-5 "
-                      onClick={() => {
-                        router.push(`/brigades/view/${item?.unitId}`);
-                      }}
-                    >
-                      <EyeIcon
-                        fontSize="15px"
-                        color="white"
-                        className="hover:text-gray-600 transition-all"
-                      />
-                    </button>
-                    <button
-                      className="w-5 h-5"
-                      onClick={() => {
-                        router.push(`/brigades/edit/${item?.unitId}`);
-                      }}
-                    >
-                      <PencilIcon
-                        fontSize="15px"
-                        color="white"
-                        className="hover:text-gray-600 transition-all"
-                      />
-                    </button>
-                    <button
-                      onClick={() => handleDeleteBrigade(String(item?.unitId))}
-                      className="w-5 h-5"
-                    >
-                      <TrashIcon
-                        fontSize="15px"
-                        color="white"
-                        className="hover:text-gray-600 transition-all"
-                      />
-                    </button>
-                  </div>
+                  <ActionButtonsForTable
+                    path="brigades"
+                    id={item.unitId}
+                    deleteItem={handleDeleteBrigade}
+                    actions={['view', 'edit', 'delete']}
+                  />
                 </td>
               </tr>
             ))}

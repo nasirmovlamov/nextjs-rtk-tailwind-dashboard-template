@@ -1,10 +1,14 @@
-"use client";
-import { configureStore } from "@reduxjs/toolkit";
-import { AuthSlice } from "./slices/AuthSlice";
-import { authApi } from "./apis/AuthApi";
-import { AppSlice } from "./slices/AppSlice";
-import { corpsApi } from "./apis/CorpsApi";
-import { brigadesApi } from "./apis/BrigadesApi";
+'use client';
+import { configureStore } from '@reduxjs/toolkit';
+import { AuthSlice } from './slices/AuthSlice';
+import { authApi } from './apis/AuthApi';
+import { AppSlice } from './slices/AppSlice';
+import { corpsApi } from './apis/CorpsApi';
+import { brigadesApi } from './apis/BrigadesApi';
+import { groupsApi } from './apis/GroupsApi';
+import { productsApi } from './apis/ProductsApi';
+import { usersApi } from './apis/UsersApi';
+import { exampleApi } from './apis/ExampleApi';
 
 export const store = configureStore({
   reducer: {
@@ -14,12 +18,22 @@ export const store = configureStore({
     [authApi.reducerPath]: authApi.reducer,
     [corpsApi.reducerPath]: corpsApi.reducer,
     [brigadesApi.reducerPath]: brigadesApi.reducer,
+    [groupsApi.reducerPath]: groupsApi.reducer,
+    [productsApi.reducerPath]: productsApi.reducer,
+    [usersApi.reducerPath]: usersApi.reducer,
+
+    // importing of exampleApi
+    [exampleApi.reducerPath]: exampleApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       authApi.middleware,
       corpsApi.middleware,
-      brigadesApi.middleware
+      brigadesApi.middleware,
+      groupsApi.middleware,
+      productsApi.middleware,
+      usersApi.middleware,
+      exampleApi.middleware,
     ),
 });
 

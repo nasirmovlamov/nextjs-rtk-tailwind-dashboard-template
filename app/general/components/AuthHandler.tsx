@@ -1,14 +1,14 @@
-"use client";
-import Sidebar from "./Sidebar";
-import Header from "./Header";
-import MainContent from "../MainContent";
-import bgImage from "../../assets/images/bg-space.webp";
-import { useAppSelector } from "@/app/redux/hooks";
-import { authApi } from "@/app/redux/apis/AuthApi";
-import { useEffect, useState } from "react";
-import { getCookie } from "@/app/utils/getCookie";
-import PageLoader from "./PageLoader";
-import { deleteCookie } from "@/app/utils/deleteCookie";
+'use client';
+import Sidebar from './Sidebar';
+import Header from './Header';
+import MainContent from '../MainContent';
+import bgImage from '../../assets/images/bg-azercosmos.jpg';
+import { useAppSelector } from '@/app/redux/hooks';
+import { authApi } from '@/app/redux/apis/AuthApi';
+import { useEffect, useState } from 'react';
+import { getCookie } from '@/app/utils/getCookie';
+import PageLoader from './PageLoader';
+import { deleteCookie } from '@/app/utils/deleteCookie';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function AuthHandler({ children }: any) {
@@ -19,7 +19,7 @@ export default function AuthHandler({ children }: any) {
   const [awaiter, setAwaiter] = useState(true);
 
   useEffect(() => {
-    const accessToken = getCookie("accessToken");
+    const accessToken = getCookie('accessToken');
     if (accessToken) {
       getUser();
     }
@@ -31,9 +31,9 @@ export default function AuthHandler({ children }: any) {
 
   useEffect(() => {
     if (isErrorGetUser) {
-      deleteCookie("accessToken");
-      deleteCookie("refreshToken");
-      deleteCookie("user");
+      deleteCookie('accessToken');
+      deleteCookie('refreshToken');
+      deleteCookie('user');
     }
   }, [isErrorGetUser]);
 
@@ -43,9 +43,9 @@ export default function AuthHandler({ children }: any) {
       {!isLoadingGetUser && !awaiter && auth?.accessToken ? (
         <>
           <div
-            className="absolute -z-10 left-0 top-0 w-full h-full bg-center"
+            className="absolute -z-10 left-0 top-0 w-full h-full bg-center bg-cover"
             style={{
-              position: "fixed",
+              position: 'fixed',
               top: 0,
               left: 0,
               right: 0,
@@ -55,15 +55,15 @@ export default function AuthHandler({ children }: any) {
           ></div>
           <div
             style={{
-              backgroundColor: "rgba(0, 0, 0, 0.4)",
-              backdropFilter: "blur(10px)",
-              position: "fixed",
+              backgroundColor: 'rgba(0, 0, 0, 0.3)',
+              backdropFilter: 'blur(5px)',
+              position: 'fixed',
               top: 0,
               left: 0,
               right: 0,
               bottom: 0,
-              width: "100vw",
-              height: "100vh",
+              width: '100vw',
+              height: '100vh',
             }}
             className="-z-10"
           ></div>
@@ -72,7 +72,7 @@ export default function AuthHandler({ children }: any) {
           <MainContent>{children}</MainContent>
         </>
       ) : (
-        <>{!awaiter ? <>{children}</> : ""}</>
+        <>{!awaiter ? <>{children}</> : ''}</>
       )}
     </>
   );

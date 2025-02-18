@@ -1,55 +1,95 @@
-import { createApi } from "@reduxjs/toolkit/query/react";
-import { axiosBaseQuery } from "../hooks";
-import { ENDPOINTS } from "@/app/consts/endpoints/endpoints";
-import { IGroup } from "../interfaces/general/group";
+import { GenericResponse } from './../interfaces/response/response';
+import { createApi } from '@reduxjs/toolkit/query/react';
+import { axiosBaseQuery } from '../hooks';
+import { ENDPOINTS } from '@/app/consts/endpoints/endpoints';
+import { IGroup } from '../interfaces/general/group';
+import { GenericPaginationResponse } from '../interfaces/response/response';
+import toast from 'react-hot-toast';
 
 export const groupsApi = createApi({
-  reducerPath: "usersApi",
+  reducerPath: 'groupsApi',
   baseQuery: axiosBaseQuery({ baseUrl: ENDPOINTS.API }),
-  tagTypes: ["User"],
+  tagTypes: ['Groups'],
   endpoints: (builder) => ({
-    getUsers: builder.query<IGroup[], void>({
-      query: () => ({
-        url: "/users",
-        method: "GET",
-      }),
-      providesTags: (result = []) =>
-        result
-          ? [
-              ...result.map(({ id }) => ({ type: "User" as const, id })),
-              { type: "User", id: "LIST" },
-            ]
-          : [{ type: "User", id: "LIST" }],
+    getGroupsAll: builder.query<GenericResponse<IGroup[]>, void>({
+      query: () => {
+        return {
+          url: 'group/all',
+          method: 'GET',
+        };
+      },
+      providesTags: [{ type: 'Groups', id: 'LIST' }],
     }),
-    getUser: builder.query<IGroup, string>({
+    getGroups: builder.query<GenericPaginationResponse<IGroup[]>, number>({
+      query: (page: number) => {
+        const urlParams = new URLSearchParams();
+        urlParams.append('page', page ? String(page) : '1');
+        return {
+          url: 'group',
+          method: 'GET',
+          params: urlParams,
+        };
+      },
+      providesTags: [{ type: 'Groups', id: 'LIST' }],
+    }),
+    getGroup: builder.query<GenericResponse<IGroup>, string>({
       query: (id) => ({
-        url: `/users/${id}`,
-        method: "GET",
+        url: `group/${id}`,
+        method: 'GET',
       }),
-      providesTags: (result, error, arg) => [{ type: "User", id: arg }],
     }),
-    createUser: builder.mutation<Omit<IGroup, 'id'>, IGroup>({
+    createGroup: builder.mutation<GenericResponse<IGroup>, Omit<IGroup, 'id'>>({
+      query: (data) => ({
+        url: 'group',
+        method: 'POST',
+        data: data,
+      }),
+      async onQueryStarted(arg, { queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          toast.success('Məlumat uğurla yaradıldı!', { position: 'top-right' });
+          // window.location.href = '/'
+        } catch (err) {
+          console.error(err);
+          toast.error('Xəta baş verdi!', { position: 'top-right' });
+        }
+      },
+      invalidatesTags: [{ type: 'Groups', id: 'LIST' }],
+    }),
+    updateGroup: builder.mutation<IGroup, IGroup>({
       query: (user) => ({
-        url: "/users",
-        method: "POST",
-        body: user,
+        url: `group`,
+        method: 'PUT',
+        data: user,
       }),
-      invalidatesTags: [{ type: "User", id: "LIST" }],
+      async onQueryStarted(arg, { queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          toast.success('Məlumat uğurla yeniləndi!', { position: 'top-right' });
+          // window.location.href = '/'
+        } catch (err) {
+          console.error(err);
+          toast.error('Xəta baş verdi!', { position: 'top-right' });
+        }
+      },
+      invalidatesTags: [{ type: 'Groups', id: 'LIST' }],
     }),
-    updateUser: builder.mutation<IGroup, IGroup>({
-      query: (user) => ({
-        url: `/users/${user.id}`,
-        method: "PUT",
-        body: user,
-      }),
-      invalidatesTags: (result, error, arg) => [{ type: "User", id: arg.id }],
-    }),
-    deleteUser: builder.mutation<void, string>({
+    deleteGroup: builder.mutation<void, string>({
       query: (id) => ({
-        url: `/users/${id}`,
-        method: "DELETE",
+        url: `group/${id}`,
+        method: 'DELETE',
       }),
-      invalidatesTags: (result, error, arg) => [{ type: "User", id: arg }],
+      async onQueryStarted(arg, { queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          toast.success('Məlumat uğurla silindi!', { position: 'top-right' });
+          // window.location.href = '/'
+        } catch (err) {
+          console.error(err);
+          toast.error('Xəta baş verdi!', { position: 'top-right' });
+        }
+      },
+      invalidatesTags: [{ type: 'Groups', id: 'LIST' }],
     }),
   }),
 });

@@ -1,19 +1,19 @@
-"use client";
+'use client';
 import {
   AxiosError,
   AxiosResponse,
   InternalAxiosRequestConfig,
-} from "./../../node_modules/axios/index.d";
-import axios, { AxiosRequestConfig } from "axios";
-import { getCookie } from "../utils/getCookie";
-import { setCookie } from "../utils/setCookie";
-import { ENDPOINTS } from "../consts/endpoints/endpoints";
-import { useDispatch, useSelector } from "react-redux";
-import type { RootState, AppDispatch } from "./store";
+} from './../../node_modules/axios/index.d';
+import axios, { AxiosRequestConfig } from 'axios';
+import { getCookie } from '../utils/getCookie';
+import { setCookie } from '../utils/setCookie';
+import { ENDPOINTS } from '../consts/endpoints/endpoints';
+import { useDispatch, useSelector } from 'react-redux';
+import type { RootState, AppDispatch } from './store';
 
 export const createAxiosInstance = ({ baseUrl }: { baseUrl: string }) => {
   // Check for access token in localStorage (or other storage mechanisms like sessionStorage)
-  const accessToken = getCookie("accessToken");
+  const accessToken = getCookie('accessToken');
 
   // Prepare headers with Bearer token if available
   const finalHeaders = {
@@ -29,7 +29,7 @@ export const createAxiosInstance = ({ baseUrl }: { baseUrl: string }) => {
   // Request Interceptor
   axiosInstance.interceptors.request.use(
     (config) => {
-      const token = getCookie("accessToken");
+      const token = getCookie('accessToken');
       if (token) {
         config = {
           ...config,
@@ -43,22 +43,22 @@ export const createAxiosInstance = ({ baseUrl }: { baseUrl: string }) => {
     },
     (error) => {
       // Handle request error
-      console.error("Request error:", error);
+      console.error('Request error:', error);
       return Promise.reject(error);
-    }
+    },
   );
 
   // Response Interceptor
   axiosInstance.interceptors.response.use(
     (response: AxiosResponse) => {
       if (response.data?.data?.accessToken) {
-        setCookie("accessToken", response.data?.data?.accessToken, 1);
+        setCookie('accessToken', response.data?.data?.accessToken, 1);
       }
       if (response.data?.data?.refreshToken) {
-        setCookie("refreshToken", response.data?.data?.refreshToken, 1);
+        setCookie('refreshToken', response.data?.data?.refreshToken, 1);
       }
       if (response.data?.data?.user) {
-        setCookie("user", JSON.stringify(response.data?.data?.user), 1);
+        setCookie('user', JSON.stringify(response.data?.data?.user), 1);
       }
 
       return response;
@@ -66,7 +66,7 @@ export const createAxiosInstance = ({ baseUrl }: { baseUrl: string }) => {
     (error: AxiosError) => {
       // Handle response error globally
       if (error.response?.status === 401) {
-        if (window.location.pathname === "/401") {
+        if (window.location.pathname === '/401') {
           // Do nothing or display a custom error message
           return;
         } else {
@@ -79,7 +79,7 @@ export const createAxiosInstance = ({ baseUrl }: { baseUrl: string }) => {
         // console.error("Server error, please try again later.");
       }
       return Promise.reject(error);
-    }
+    },
   );
 
   return axiosInstance;
@@ -93,7 +93,7 @@ export const axiosBaseQuery =
   ({ baseUrl }: { baseUrl?: string } = { baseUrl: ENDPOINTS.API }) =>
   async ({ url, method, data, params, headers }: AxiosRequestConfig) => {
     const axiosInstance = createAxiosInstance({
-      baseUrl: baseUrl ? baseUrl : "",
+      baseUrl: baseUrl ? baseUrl : '',
     });
 
     try {

@@ -1,6 +1,6 @@
-"use client";
-import { corpsApi } from "@/app/redux/apis/CorpsApi";
-import { useParams } from "next/navigation";
+'use client';
+import { corpsApi } from '@/app/redux/apis/CorpsApi';
+import { useParams } from 'next/navigation';
 
 export default function CorpsView() {
   const params = useParams();
@@ -21,9 +21,7 @@ export default function CorpsView() {
 
         {/* form group */}
         <div className="flex flex-col w-48">
-          <label className="text-sm/6 font-medium text-white">
-            Korpus Kodu
-          </label>
+          <label className="text-sm/6 font-medium text-white">Korpus Kodu</label>
           <div className=" mt-3 block rounded-lg border-none bg-white/5 py-1.5 px-3 text-sm/6 text-white">
             {response?.data.corpusSerialNumber}
           </div>

@@ -1,9 +1,9 @@
-'use client'
-import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
-import { ReactNode } from "react"; // Import ReactNode
+'use client';
+import { ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useState } from 'react';
+import { ReactNode } from 'react'; // Import ReactNode
 
 interface DropdownChild {
   label: string;
@@ -20,19 +20,19 @@ interface DropdownProps {
 }
 
 export default function Dropdown({ title, items, icon, route }: DropdownProps) {
-  const pathname = usePathname()
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
-
   return (
     <div className="box-border text-lg">
       <button
-        className={`w-full text-left flex justify-between items-center gap-5 text-lg text-white 
-          ${route ? (pathname === route ? "bg-[#97979770]" : "") : ""}
+        data-testid={`button-${title.toLowerCase()}`}
+        className={`w-full text-left flex justify-between items-center gap-5 text-lg 
+          ${route ? (pathname === route ? 'bg-[#97979770]' : '') : ''}
           px-2 py-2 rounded-md hover:bg-[#97979720]`}
         onClick={items ? toggleDropdown : () => {}}
       >
@@ -54,8 +54,9 @@ export default function Dropdown({ title, items, icon, route }: DropdownProps) {
             <Link
               key={index}
               href={child.route}
-              className={`w-full text-left flex gap-5 items-center h-10 px-6 text-white mt-1 text-lg
-                ${pathname === child.route ? "bg-[#97979770]" : ""}
+              data-testid={`link-${child.route.toLowerCase()}`}
+              className={`w-full text-left flex gap-5 items-center h-10 px-6  mt-1 text-lg
+                ${pathname === child.route ? 'bg-[#97979770]' : ''}
                 hover:bg-[#97979720] rounded-md`}
             >
               {child.icon && child.icon}

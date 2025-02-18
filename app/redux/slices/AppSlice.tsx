@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 // Define a type for the slice state
 interface AppState {
@@ -15,7 +15,7 @@ const initialState: AppState = {
 };
 
 export const AppSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {

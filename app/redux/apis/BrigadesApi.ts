@@ -1,90 +1,86 @@
-"use client";
-import { createApi } from "@reduxjs/toolkit/query/react";
-import { axiosBaseQuery } from "../hooks";
-import { ENDPOINTS } from "@/app/consts/endpoints/endpoints";
-import {
-  GenericPaginationResponse,
-  GenericResponse,
-} from "../interfaces/response/response";
-import toast from "react-hot-toast";
-import { IBrigade, ICreateBrigade, IUpdateBrigade } from "../interfaces/general/brigade";
+'use client';
+import { createApi } from '@reduxjs/toolkit/query/react';
+import { axiosBaseQuery } from '../hooks';
+import { ENDPOINTS } from '@/app/consts/endpoints/endpoints';
+import { GenericPaginationResponse, GenericResponse } from '../interfaces/response/response';
+import toast from 'react-hot-toast';
+import { IBrigade, ICreateBrigade, IUpdateBrigade } from '../interfaces/general/brigade';
 
 export const brigadesApi = createApi({
-  reducerPath: "brigadesApi",
+  reducerPath: 'brigadesApi',
   baseQuery: axiosBaseQuery({ baseUrl: ENDPOINTS.API }),
-  tagTypes: ["Brigades"],
+  tagTypes: ['Brigades'],
   endpoints: (builder) => ({
-    getBrigades: builder.query<GenericPaginationResponse<IBrigade[]>, void>({
-      query: (params) => ({
-        url: "unit",
-        method: "GET",
-        params: params,
-      }),
-      providesTags: [{ type: "Brigades", id: "LIST" }],
+    getBrigades: builder.query<GenericPaginationResponse<IBrigade[]>, number>({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      query: (page: number) => {
+        const urlParams = new URLSearchParams();
+        urlParams.append('page', page ? String(page) : '1');
+        return {
+          url: 'unit',
+          method: 'GET',
+          params: urlParams,
+        };
+      },
+      providesTags: [{ type: 'Brigades', id: 'LIST' }],
     }),
     getBrigade: builder.query<GenericResponse<IBrigade>, string>({
       query: (id) => ({
         url: `unit/${id}`,
-        method: "GET",
+        method: 'GET',
       }),
-      providesTags: (result, error, arg) => [{ type: "Brigades", id: arg }],
+      providesTags: (result, error, arg) => [{ type: 'Brigades', id: arg }],
     }),
-    createBrigades: builder.mutation<
-      GenericPaginationResponse<IBrigade[]>,
-      ICreateBrigade
-    >({
+    createBrigades: builder.mutation<GenericPaginationResponse<IBrigade[]>, ICreateBrigade>({
       query: (corp) => ({
-        url: "unit",
-        method: "POST",
+        url: 'unit',
+        method: 'POST',
         data: corp,
       }),
-      invalidatesTags: [{ type: "Brigades", id: "LIST" }],
+      invalidatesTags: [{ type: 'Brigades', id: 'LIST' }],
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
           await queryFulfilled;
-          toast.success("Məlumat uğurla yaradıldı!", { position: "top-right" });
+          toast.success('Məlumat uğurla yaradıldı!', { position: 'top-right' });
           // window.location.href = '/'
         } catch (err) {
           console.error(err);
-          toast.error("Xəta baş verdi!", { position: "top-right" });
+          toast.error('Xəta baş verdi!', { position: 'top-right' });
         }
       },
     }),
-    updateBrigades: builder.mutation<
-      GenericPaginationResponse<IBrigade[]>,
-      IUpdateBrigade
-    >({
+    updateBrigades: builder.mutation<GenericPaginationResponse<IBrigade[]>, IUpdateBrigade>({
       query: (corp) => ({
         url: `unit`,
-        method: "PUT",
+        method: 'PUT',
         data: corp,
       }),
-      invalidatesTags: [{ type: "Brigades", id: "LIST" }],
+      invalidatesTags: [{ type: 'Brigades', id: 'LIST' }],
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
           await queryFulfilled;
-          toast.success("Məlumat uğurla yeniləndi!", { position: "top-right" });
+          toast.success('Məlumat uğurla yeniləndi!', { position: 'top-right' });
           // window.location.href = '/'
         } catch (err) {
           console.error(err);
-          toast.error("Xəta baş verdi!", { position: "top-right" });
+          toast.error('Xəta baş verdi!', { position: 'top-right' });
         }
       },
     }),
     deleteBrigades: builder.mutation<void, string>({
       query: (id) => ({
-        url: `/unit/${id}`,
-        method: "DELETE",
+        url: `unit/${id}`,
+        method: 'DELETE',
       }),
-      invalidatesTags: [{ type: "Brigades", id: "LIST" }],
+      invalidatesTags: [{ type: 'Brigades', id: 'LIST' }],
       async onQueryStarted(arg, { queryFulfilled }) {
         try {
           await queryFulfilled;
-          toast.success("Məlumat uğurla silindi!", { position: "top-right" });
+          toast.success('Məlumat uğurla silindi!', { position: 'top-right' });
           // window.location.href = '/'
         } catch (err) {
           console.error(err);
-          toast.error("Xəta baş verdi!", { position: "top-right" });
+          toast.error('Xəta baş verdi!', { position: 'top-right' });
         }
       },
     }),

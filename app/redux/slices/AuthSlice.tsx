@@ -1,28 +1,28 @@
-import type { PayloadAction } from "@reduxjs/toolkit";
-import { createSlice } from "@reduxjs/toolkit";
-import { IUser } from "../interfaces/general/auth";
-import { ResponseLogin } from "../interfaces/response/auth";
-import { deleteCookie } from "@/app/utils/deleteCookie";
-import { setCookie } from "@/app/utils/setCookie";
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+import { ResponseLogin } from '../interfaces/response/auth';
+import { deleteCookie } from '@/app/utils/deleteCookie';
+import { setCookie } from '@/app/utils/setCookie';
+import { IAuthUser } from '../interfaces/general/auth';
 
 // Define a type for the slice state
 interface AuthState {
   accessToken: string | null;
   refreshToken: string | null;
-  user: IUser | null;
-  status: "idle" | true | false;
+  user: IAuthUser | null;
+  status: 'idle' | true | false;
 }
 
 // Define the initial state using that type
 const initialState: AuthState = {
-  accessToken: "",
-  refreshToken: "",
+  accessToken: '',
+  refreshToken: '',
   user: null,
-  status: "idle",
+  status: 'idle',
 };
 
 export const AuthSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
@@ -33,9 +33,9 @@ export const AuthSlice = createSlice({
         state.user = action.payload?.data?.user;
       }
       state.status = true;
-      setCookie("accessToken", action.payload?.data?.accessToken, 1);
-      setCookie("refreshToken", action.payload?.data?.refreshToken, 1);
-      setCookie("user", JSON.stringify(action.payload?.data?.user), 1);
+      setCookie('accessToken', action.payload?.data?.accessToken, 1);
+      setCookie('refreshToken', action.payload?.data?.refreshToken, 1);
+      setCookie('user', JSON.stringify(action.payload?.data?.user), 1);
     },
 
     setUnAuth: (state) => {
@@ -43,11 +43,11 @@ export const AuthSlice = createSlice({
       state.refreshToken = null;
       state.user = null;
       state.status = false;
-      deleteCookie("accessToken");
-      deleteCookie("refreshToken");
-      deleteCookie("user");
+      deleteCookie('accessToken');
+      deleteCookie('refreshToken');
+      deleteCookie('user');
     },
-    
+
     setStatus: (state, action: PayloadAction<boolean>) => {
       state.status = action.payload;
     },

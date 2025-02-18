@@ -1,8 +1,8 @@
-"use client";
-import { useForm } from "react-hook-form";
-import armyBg from "../public/army-bg.jpg";
-import { authApi } from "./redux/apis/AuthApi";
-import { RequestLogin } from "./redux/interfaces/request/auth";
+'use client';
+import { useForm } from 'react-hook-form';
+import armyBg from '../public/army-bg.jpg';
+import { authApi } from './redux/apis/AuthApi';
+import { RequestLogin } from './redux/interfaces/request/auth';
 
 export default function Login() {
   const [login, { error, isLoading }] = authApi.useLoginMutation();
@@ -27,16 +27,11 @@ export default function Login() {
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white p-10 shadow sm:rounded-lg sm:px-10">
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
-              <h2 className="text-gray-800 text-center text-3xl font-extrabold ">
-                Daxil ol
-              </h2>
+              <h2 className="text-gray-800 text-center text-3xl font-extrabold ">Daxil ol</h2>
             </div>
             <form className="space-y-6 mt-6" onSubmit={handleSubmit(onSubmit)}>
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                   İstifadəçi adı
                 </label>
                 <div className="mt-1">
@@ -46,16 +41,13 @@ export default function Login() {
                     autoComplete="username"
                     required
                     className="appearance-none relative block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    {...register("username")}
+                    {...register('username')}
                   />
                 </div>
               </div>
 
               <div>
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                   Şifrə
                 </label>
                 <div className="mt-1">
@@ -65,7 +57,7 @@ export default function Login() {
                     autoComplete="current-password"
                     required
                     className="appearance-none relative block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    {...register("password")}
+                    {...register('password')}
                   />
                 </div>
               </div>
@@ -78,8 +70,8 @@ export default function Login() {
                   disabled={isLoading} // Disable button while isLoading
                   className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md font-medium ${
                     isLoading
-                      ? "bg-gray-400 cursor-not-allowed" // Style for isLoading state
-                      : "bg-indigo-600 hover:bg-indigo-700 text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      ? 'bg-gray-400 cursor-not-allowed' // Style for isLoading state
+                      : 'bg-indigo-600 hover:bg-indigo-700 text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                   }`}
                 >
                   {isLoading ? (
@@ -104,7 +96,7 @@ export default function Login() {
                       ></path>
                     </svg>
                   ) : (
-                    "Davam et"
+                    'Davam et'
                   )}
                 </button>
               </div>

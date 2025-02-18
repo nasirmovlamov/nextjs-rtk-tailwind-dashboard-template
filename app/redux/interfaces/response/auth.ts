@@ -1,15 +1,15 @@
-import { IUser } from "../general/auth";
+import { IAuthUser } from '../general/auth';
 
 export interface ResponseLogin {
   data: {
     accessToken: string;
     refreshToken: string;
-    user: IUser;
+    user: IAuthUser;
   };
 }
 
 export interface ResponseAuth {
-  data: IUser;
+  data: IAuthUser;
 }
 
 export interface ResponseLogout {

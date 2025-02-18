@@ -1,19 +1,19 @@
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import { Geist, Geist_Mono } from 'next/font/google';
+import './globals.css';
 // import { Provider } from "react-redux";
-import Wrapper from "./general/components/Wrapper";
+import Wrapper from './general/components/Wrapper';
 // import Sidebar from "./general/components/Sidebar";
-import Head from "next/head";
-import AuthHandler from "./general/components/AuthHandler";
+import Head from 'next/head';
+import AuthHandler from './general/components/AuthHandler';
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
 });
 
 export default function RootLayout({
@@ -24,13 +24,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Head>
-        <title>
-          MN | Rabitə Təminatı Vasitələrinin İdarə Olunması Proqram Təminatı
-        </title>
+        <title>MN | Rabitə Təminatı Vasitələrinin İdarə Olunması Proqram Təminatı</title>
       </Head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Wrapper>
           <AuthHandler>{children}</AuthHandler>
         </Wrapper>

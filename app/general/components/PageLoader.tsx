@@ -1,5 +1,5 @@
 // components/PageLoader.js
-import radarAnimation from "../../assets/images/radar-animation-bg.gif";
+import radarAnimation from '../../assets/images/radar-animation-bg.gif';
 export default function PageLoader() {
   return (
     <div className="flex justify-center items-center min-h-screen bg-[#000000] rounded-lg w-full">

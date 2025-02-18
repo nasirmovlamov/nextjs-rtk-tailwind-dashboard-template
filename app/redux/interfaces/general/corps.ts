@@ -1,5 +1,5 @@
 export interface ICorp {
   corpusName: string;
-  corpusSerialNumber: string;
+  corpusSerialNumber: number;
   id: number;
 }

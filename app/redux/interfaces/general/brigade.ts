@@ -14,7 +14,6 @@ export interface IUpdateBrigade {
   id: number;
 }
 
-
 export interface ICreateBrigade {
   corpusId: number;
   unitSerialNumber: number;

@@ -1,24 +1,24 @@
-"use client";
-import React, { useState, useEffect } from "react";
+'use client';
+import React, { useState, useEffect } from 'react';
 
 export default function DarkModeButton() {
   const [isDarkMode, setIsDarkMode] = useState<string>(
-    localStorage.getItem("dark") ? "dark" : "light"
+    localStorage.getItem('dark') ? 'dark' : 'light',
   );
 
   useEffect(() => {
     localStorage.currentTheme = isDarkMode;
-    if (isDarkMode == "dark") {
-      document.documentElement.classList.remove("light");
-      document.documentElement.classList.add("dark");
+    if (isDarkMode == 'dark') {
+      document.documentElement.classList.remove('light');
+      document.documentElement.classList.add('dark');
     } else {
-      document.documentElement.classList.remove("dark");
-      document.documentElement.classList.add("light");
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
     }
   }, [isDarkMode]);
 
   const toggleDarkMode = () => {
-    setIsDarkMode(isDarkMode === "dark" ? "light" : "dark");
+    setIsDarkMode(isDarkMode === 'dark' ? 'light' : 'dark');
   };
 
   return (
@@ -27,7 +27,7 @@ export default function DarkModeButton() {
       type="button"
       className="shadow-md p-2 rounded-lg bg-gray-200 dark:bg-gray-500 hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-600 transition-colors duration-300"
     >
-      {isDarkMode === "dark" ? (
+      {isDarkMode === 'dark' ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

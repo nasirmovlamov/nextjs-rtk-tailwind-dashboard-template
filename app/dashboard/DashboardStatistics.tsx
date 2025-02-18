@@ -1,65 +1,62 @@
 import {
-    CircleStackIcon,
-    FireIcon,
-    GlobeAltIcon,
-  PresentationChartBarIcon,
+  CircleStackIcon,
+  FireIcon,
+  GlobeAltIcon,
   ServerIcon,
-  TruckIcon,
   UnderlineIcon,
   WifiIcon,
-  WrenchScrewdriverIcon,
-} from "@heroicons/react/24/solid";
-import DashboardCard from "./DashboardCard";
+} from '@heroicons/react/24/solid';
+import DashboardCard from './DashboardCard';
 
 export default function DashboardStatistics() {
   const assets = [
     {
       id: 1,
-      name: "Server Rack",
-      value: "$8000",
-      status: "Operational",
-      icon: <ServerIcon width='25px' />, // Placeholder icon
+      name: 'Server Rack',
+      value: '$8000',
+      status: 'Operational',
+      icon: <ServerIcon width="25px" />, // Placeholder icon
     },
     {
       id: 2,
-      name: "Network",
-      value: "$2500",
-      status: "Operational",
-      icon: <GlobeAltIcon width='25px' />, // Placeholder icon
+      name: 'Network',
+      value: '$2500',
+      status: 'Operational',
+      icon: <GlobeAltIcon width="25px" />, // Placeholder icon
     },
     {
       id: 3,
-      name: "Firewall",
-      value: "$5000",
-      status: "In Maintenance",
-      icon: <FireIcon width='25px'/> , // Placeholder icon
+      name: 'Firewall',
+      value: '$5000',
+      status: 'In Maintenance',
+      icon: <FireIcon width="25px" />, // Placeholder icon
     },
     {
       id: 4,
-      name: "Database",
-      value: "$12000",
-      status: "Operational",
-      icon: <CircleStackIcon width='25px' />, // Placeholder icon
+      name: 'Database',
+      value: '$12000',
+      status: 'Operational',
+      icon: <CircleStackIcon width="25px" />, // Placeholder icon
     },
     {
       id: 5,
-      name: "Web Server",
-      value: "$10000",
-      status: "Operational",
-      icon: <UnderlineIcon width='25px' />, // Placeholder icon
+      name: 'Web Server',
+      value: '$10000',
+      status: 'Operational',
+      icon: <UnderlineIcon width="25px" />, // Placeholder icon
     },
     {
       id: 7,
-      name: "Rabitə cihazları",
-      value: "$3000",
-      status: "Operational",
-      icon: <WifiIcon width='25px' />, // Placeholder icon
+      name: 'Rabitə cihazları',
+      value: '$3000',
+      status: 'Operational',
+      icon: <WifiIcon width="25px" />, // Placeholder icon
     },
   ];
 
   return (
     <div className="flex  ">
-      <div className="w-full flex flex-wrap gap-12 mt-4 justify-between">
+      <div className="w-full flex flex-wrap gap-5 mt-4 justify-between">
         {assets.map((asset) => (
           <DashboardCard
             key={asset.id}
