@@ -1,6 +1,8 @@
 'use client';
-import { usersApi } from '@/app/redux/apis/UsersApi';
+
+import StyledContainer from '@/app/general/components/StyledContainer';
 import { useParams } from 'next/navigation';
+import { usersApi } from '@/app/redux/apis/UsersApi';
 
 export default function UsersView() {
   const params = useParams();
@@ -8,7 +10,7 @@ export default function UsersView() {
   const { data: response } = usersApi.useGetItemQuery(String(id));
 
   return (
-    <div className="flex flex-col bg-[#2b353dcd] w-full rounded p-4 text-white">
+    <StyledContainer>
       <h1 className="text-2xl">İstifadəçi məlumatları</h1>
       <form className="flex flex-wrap gap-x-5 gap-y-4 mt-5">
         {/* form user */}
@@ -27,6 +29,6 @@ export default function UsersView() {
           </div>
         </div>
       </form>
-    </div>
+    </StyledContainer>
   );
 }

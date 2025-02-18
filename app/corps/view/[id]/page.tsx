@@ -1,4 +1,6 @@
 'use client';
+
+import StyledContainer from '@/app/general/components/StyledContainer';
 import { corpsApi } from '@/app/redux/apis/CorpsApi';
 import { useParams } from 'next/navigation';
 
@@ -8,7 +10,7 @@ export default function CorpsView() {
   const { data: response } = corpsApi.useGetCorpQuery(id);
 
   return (
-    <div className="flex flex-col bg-[#2b353dcd] w-full rounded p-4 text-white">
+    <StyledContainer>
       <h1 className="text-2xl">Korpus məlumatları</h1>
       <form className="flex flex-wrap gap-x-5 gap-y-4 mt-5">
         {/* form group */}
@@ -27,6 +29,6 @@ export default function CorpsView() {
           </div>
         </div>
       </form>
-    </div>
+    </StyledContainer>
   );
 }

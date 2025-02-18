@@ -1,14 +1,16 @@
 'use client';
-import Sidebar from './Sidebar';
+
+import { useEffect, useState } from 'react';
+
 import Header from './Header';
 import MainContent from '../MainContent';
-import bgImage from '../../assets/images/bg-azercosmos.jpg';
-import { useAppSelector } from '@/app/redux/hooks';
-import { authApi } from '@/app/redux/apis/AuthApi';
-import { useEffect, useState } from 'react';
-import { getCookie } from '@/app/utils/getCookie';
 import PageLoader from './PageLoader';
+import Sidebar from './Sidebar';
+import { authApi } from '@/app/redux/apis/AuthApi';
+import bgImage from '../../assets/images/army-bg-2.jpg';
 import { deleteCookie } from '@/app/utils/deleteCookie';
+import { getCookie } from '@/app/utils/getCookie';
+import { useAppSelector } from '@/app/redux/hooks';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function AuthHandler({ children }: any) {
@@ -55,9 +57,10 @@ export default function AuthHandler({ children }: any) {
           ></div>
           <div
             style={{
-              backgroundColor: 'rgba(0, 0, 0, 0.3)',
-              backdropFilter: 'blur(5px)',
+              backgroundColor: 'rgba(0, 0, 0, 0.7)',
+              backdropFilter: 'blur(15px)',
               position: 'fixed',
+              backgroundPosition: 'center',
               top: 0,
               left: 0,
               right: 0,

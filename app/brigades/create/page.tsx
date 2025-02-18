@@ -1,8 +1,10 @@
 'use client';
+
 import Button from '@/app/general/components/Button';
+import { ICreateBrigade } from '@/app/redux/interfaces/general/brigade';
+import StyledContainer from '@/app/general/components/StyledContainer';
 import { brigadesApi } from '@/app/redux/apis/BrigadesApi';
 import { corpsApi } from '@/app/redux/apis/CorpsApi';
-import { ICreateBrigade } from '@/app/redux/interfaces/general/brigade';
 import { useForm } from 'react-hook-form';
 
 export default function BrigadesCreate() {
@@ -19,7 +21,7 @@ export default function BrigadesCreate() {
   };
 
   return (
-    <div className="flex flex-col bg-[#2b353dcd] w-full rounded p-4 text-white">
+    <StyledContainer>
       <h1 className="text-2xl">Korpus əlavə et</h1>
       <form className="flex flex-wrap gap-x-5 gap-y-4 mt-5" onSubmit={handleSubmit(onSubmit)}>
         {/* form group */}
@@ -64,6 +66,6 @@ export default function BrigadesCreate() {
           <Button>Təsdiqlə</Button>
         </div>
       </form>
-    </div>
+    </StyledContainer>
   );
 }

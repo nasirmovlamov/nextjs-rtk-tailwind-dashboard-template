@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev --turbopack  && npm run format:watch",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "e2e": "npx playwright test --ui",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "format:watch": "prettier --watch ."
   },
   "dependencies": {
     "@headlessui/react": "^2.2.0",

@@ -77,7 +77,7 @@ export const PaginationHandler: React.FC<PaginationProps> = ({
           disabled={currentPage === 1}
           className={`${
             currentPage === 1 ? 'cursor-not-allowed' : ''
-          } relative inline-flex items-center rounded-l-md px-2 py-2 ring-1 ring-gray-300 ring-inset hover:bg-gray-500 focus:z-20 focus:outline-offset-0 disabled:opacity-50`}
+          } relative inline-flex items-center rounded-l-md px-2 py-2 ring-1 ring-gray-600 ring-inset hover:bg-gray-500 focus:z-20 focus:outline-offset-0 disabled:opacity-50`}
         >
           Previous
         </button>
@@ -86,7 +86,7 @@ export const PaginationHandler: React.FC<PaginationProps> = ({
             return (
               <button
                 key={`dots-${Math.random()}`}
-                className="relative inline-flex items-center px-4 py-2 text-sm font-semibold  ring-1 ring-gray-300 ring-inset focus:outline-offset-0"
+                className="  relative inline-flex items-center px-4 py-2 text-sm font-semibold  "
               >
                 {String(page)}
               </button>
@@ -99,10 +99,10 @@ export const PaginationHandler: React.FC<PaginationProps> = ({
               <button
                 key={`pages-${page}`}
                 onClick={() => handlePageClick(page)}
-                className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold  ring-1 ring-gray-300 ring-inset hover:bg-gray-500 focus:z-20 focus:outline-offset-0 ${
+                className={`relative inline-flex items-center  px-4 py-2 text-sm ring-gray-500  font-semibold hover:bg-gray-500 focus:z-20 focus:outline-offset-0 ${
                   page === currentPage
-                    ? 'z-10 bg-gray-800 text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 hover:bg-gray-800'
-                    : 'bg-gray-600'
+                    ? 'z-10 bg-[#131313d8]  border-y text-white  hover:bg-gray-800'
+                    : 'bg-[#131313ad] '
                 }`}
               >
                 {page}
@@ -116,7 +116,7 @@ export const PaginationHandler: React.FC<PaginationProps> = ({
           disabled={currentPage === totalPages}
           className={`${
             currentPage === totalPages ? 'cursor-not-allowed' : ''
-          } relative inline-flex items-center rounded-r-md px-2 py-2  ring-1 ring-gray-300 ring-inset hover:bg-gray-500 focus:z-20 focus:outline-offset-0 disabled:opacity-50`}
+          } relative inline-flex items-center rounded-r-md px-2 py-2  ring-1 ring-gray-500 ring-inset hover:bg-gray-500 focus:z-20 focus:outline-offset-0 disabled:opacity-50`}
         >
           Next
         </button>

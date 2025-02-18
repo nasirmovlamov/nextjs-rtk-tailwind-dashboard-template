@@ -1,10 +1,12 @@
 'use client';
+
 import Button from '@/app/general/components/Button';
-import { corpsApi } from '@/app/redux/apis/CorpsApi';
 import { ICorp } from '@/app/redux/interfaces/general/corps';
-import { useParams } from 'next/navigation';
+import StyledContainer from '@/app/general/components/StyledContainer';
+import { corpsApi } from '@/app/redux/apis/CorpsApi';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useParams } from 'next/navigation';
 
 export default function CorpsEdit() {
   const params = useParams();
@@ -24,7 +26,7 @@ export default function CorpsEdit() {
   }, [response]);
 
   return (
-    <div className="flex flex-col bg-[#2b353dcd] w-full rounded p-4 text-white">
+    <StyledContainer>
       <h1 className="text-2xl">Korpus məlumatlarını dəyiş</h1>
       <form className="flex flex-wrap gap-x-5 gap-y-4 mt-5" onSubmit={handleSubmit(onSubmit)}>
         {/* form group */}
@@ -51,6 +53,6 @@ export default function CorpsEdit() {
           <Button>Təsdiqlə</Button>
         </div>
       </form>
-    </div>
+    </StyledContainer>
   );
 }

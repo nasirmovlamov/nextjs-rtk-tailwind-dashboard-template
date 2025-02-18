@@ -1,11 +1,13 @@
 'use client';
+
 import Button from '@/app/general/components/Button';
+import { IUpdateBrigade } from '@/app/redux/interfaces/general/brigade';
+import StyledContainer from '@/app/general/components/StyledContainer';
 import { brigadesApi } from '@/app/redux/apis/BrigadesApi';
 import { corpsApi } from '@/app/redux/apis/CorpsApi';
-import { IUpdateBrigade } from '@/app/redux/interfaces/general/brigade';
-import { useParams } from 'next/navigation';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useParams } from 'next/navigation';
 
 export default function BrigadesEdit() {
   const params = useParams();
@@ -35,7 +37,7 @@ export default function BrigadesEdit() {
   }, [response]);
 
   return (
-    <div className="flex flex-col bg-[#2b353dcd] w-full rounded p-4 text-white">
+    <StyledContainer>
       <h1 className="text-2xl">Briqada məlumatlarını dəyiş</h1>
       <form className="flex flex-wrap gap-x-5 gap-y-4 mt-5" onSubmit={handleSubmit(onSubmit)}>
         {/* form group */}
@@ -80,6 +82,6 @@ export default function BrigadesEdit() {
           <Button>Təsdiqlə</Button>
         </div>
       </form>
-    </div>
+    </StyledContainer>
   );
 }

@@ -4,9 +4,14 @@ import {
   ArrowLeftEndOnRectangleIcon,
   BuildingLibraryIcon,
   BuildingOffice2Icon,
+  DocumentIcon,
+  DocumentMinusIcon,
+  DocumentTextIcon,
+  FolderPlusIcon,
   ListBulletIcon,
   PlusCircleIcon,
   RadioIcon,
+  ReceiptPercentIcon,
   RectangleGroupIcon,
   UsersIcon,
 } from '@heroicons/react/24/solid';
@@ -46,7 +51,7 @@ export default function Sidebar() {
       </Link>
 
       <div className="flex flex-col h-[80vh]">
-        <div className="box-border pt-10 text-xs">
+        <div className="box-border pt-10 text-xs  overflow-y-auto">
           <Dropdown
             title="İstifadəçilər"
             icon={<UsersIcon className="h-6 w-6" />}
@@ -133,18 +138,28 @@ export default function Sidebar() {
           />
 
           <Dropdown
-            title="Vəsaitlər"
-            icon={<RadioIcon className="h-6 w-6" />}
+            title="Sənədlər"
+            icon={<DocumentIcon className="h-6 w-6" />}
             items={[
               {
-                label: 'siyahısı',
-                route: '/products',
-                icon: <ListBulletIcon className="h-5 w-5" />, // If you have an icon
+                label: 'naryadlar',
+                route: '/documents/shifts',
+                icon: <DocumentTextIcon className="h-5 w-5" />, // If you have an icon
               },
               {
-                label: 'əlavə et',
-                route: '/products/create',
-                icon: <PlusCircleIcon className="h-5 w-5" />, // If you have an icon
+                label: 'mədaxillər',
+                route: '/documents/receipts',
+                icon: <FolderPlusIcon className="h-5 w-5" />, // If you have an icon
+              },
+              {
+                label: 'qaimələr',
+                route: '/documents/overheads',
+                icon: <ReceiptPercentIcon className="h-5 w-5" />, // If you have an icon
+              },
+              {
+                label: 'silinmələr',
+                route: '/documents/deletions',
+                icon: <DocumentMinusIcon className="h-5 w-5" />, // If you have an icon
               },
             ]}
           />

@@ -1,9 +1,10 @@
 'use client';
-import { useEffect } from 'react';
+
 import { ActionButtonsForTable } from '../general/components/ActionButtonsForTable';
 import { PaginationHandler } from '../general/components/PaginationHandler';
 import TableSkeleton from '../general/components/TableSkeleton';
 import { brigadesApi } from '../redux/apis/BrigadesApi';
+import { useEffect } from 'react';
 
 export default function Brigades() {
   const [getBrigades, { data: response, isLoading: isLoadingGetBrigades }] =
@@ -19,10 +20,10 @@ export default function Brigades() {
   }, []);
 
   return (
-    <div className="relative flex flex-col w-full overflow-auto text-white bg-[#2b353dcd] shadow-md rounded-xl bg-clip-border">
+    <div className="relative flex flex-col w-full overflow-auto text-white bg-[#131313b2] shadow-md rounded-xl bg-clip-border">
       <TableSkeleton isLoading={isLoadingGetBrigades} rows={10}>
         <table className="w-full text-left table-auto min-w-max">
-          <thead className="bg-[#2b353df7]">
+          <thead className="bg-[#131313d8]">
             <tr>
               <th className="p-4  ">
                 <p className="block font-sans text-sm antialiased  leading-none font-bold ">Adı</p>

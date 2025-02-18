@@ -14,10 +14,34 @@
   }
 }
 
+@font-face {
+  font-family: GI;
+  font-style: normal;
+  font-weight: 700;
+  src: url('./assets/fonts/GI-750.woff') format('woff');
+  text-rendering: optimizeLegibility;
+}
+
+@font-face {
+  font-family: GI;
+  font-style: normal;
+  font-weight: 600;
+  src: url('./assets/fonts/GI-530.woff') format('woff');
+  text-rendering: optimizeLegibility;
+}
+
+@font-face {
+  font-family: GI;
+  font-style: normal;
+  font-weight: 400;
+  src: url('./assets/fonts/GI-400.woff') format('woff');
+  text-rendering: optimizeLegibility;
+}
+
 body {
   /* color: var(--foreground); */
   background: var(--background);
-  font-family:
+  /* font-family:
     Inter,
     -apple-system,
     BlinkMacSystemFont,
@@ -26,7 +50,33 @@ body {
     Arial,
     sans-serif,
     'Apple Color Emoji',
-    'Segoe UI Emoji';
+    'Segoe UI Emoji'; */
+}
+
+/* For Webkit Browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 8px; /* Adjust width */
+}
+
+::-webkit-scrollbar-track {
+  background: #111; /* Dark track */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333; /* Darker thumb */
+  border-radius: 10px;
+  border: 2px solid #111; /* Creates spacing effect */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Slightly lighter on hover */
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #333 #111;
 }
 
 .input {

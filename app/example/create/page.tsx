@@ -1,7 +1,9 @@
 'use client';
+
 import Button from '@/app/general/components/Button';
-import { exampleApi } from '@/app/redux/apis/ExampleApi';
 import { IExample } from '@/app/redux/interfaces/general/example';
+import StyledContainer from '@/app/general/components/StyledContainer';
+import { exampleApi } from '@/app/redux/apis/ExampleApi';
 import { useForm } from 'react-hook-form';
 
 export default function ItemsCreate() {
@@ -13,7 +15,7 @@ export default function ItemsCreate() {
     });
   };
   return (
-    <div className="flex flex-col bg-[#2b353dcd] w-full rounded p-4 text-white">
+    <StyledContainer>
       <h1 className="text-2xl">Example əlavə et</h1>
       <form className="flex flex-wrap gap-x-5 gap-y-4 mt-5" onSubmit={handleSubmit(onSubmit)}>
         {/* form product */}
@@ -32,6 +34,6 @@ export default function ItemsCreate() {
           <Button>Təsdiqlə</Button>
         </div>
       </form>
-    </div>
+      </StyledContainer>
   );
 }

@@ -1,7 +1,9 @@
 'use client';
+
 import Button from '@/app/general/components/Button';
-import { corpsApi } from '@/app/redux/apis/CorpsApi';
 import { ICorp } from '@/app/redux/interfaces/general/corps';
+import StyledContainer from '@/app/general/components/StyledContainer';
+import { corpsApi } from '@/app/redux/apis/CorpsApi';
 import { useForm } from 'react-hook-form';
 
 export default function CorpsCreate() {
@@ -14,7 +16,7 @@ export default function CorpsCreate() {
     });
   };
   return (
-    <div className="flex flex-col bg-[#2b353dcd] w-full rounded p-4 text-white">
+    <StyledContainer>
       <h1 data-testid="corps-title" className="text-2xl">
         Korpus əlavə et
       </h1>
@@ -45,6 +47,6 @@ export default function CorpsCreate() {
           <Button data-testid="button-submit">Təsdiqlə</Button>
         </div>
       </form>
-    </div>
+    </StyledContainer>
   );
 }

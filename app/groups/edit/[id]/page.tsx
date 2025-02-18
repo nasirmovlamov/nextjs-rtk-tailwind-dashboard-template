@@ -1,10 +1,12 @@
 'use client';
+
 import Button from '@/app/general/components/Button';
+import { IGroup } from '@/app/redux/interfaces/general/group';
+import StyledContainer from '@/app/general/components/StyledContainer';
 import { groupsApi } from '@/app/redux/apis/GroupsApi';
-import { useParams } from 'next/navigation';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { IGroup } from '@/app/redux/interfaces/general/group';
+import { useParams } from 'next/navigation';
 
 export default function GroupsEdit() {
   const params = useParams();
@@ -32,7 +34,7 @@ export default function GroupsEdit() {
   }, [response]);
 
   return (
-    <div className="flex flex-col bg-[#2b353dcd] w-full rounded p-4 text-white">
+    <StyledContainer>
       <h1 className="text-2xl">Qrup məlumatlarını dəyiş</h1>
       <form className="flex flex-wrap gap-x-5 gap-y-4 mt-5" onSubmit={handleSubmit(onSubmit)}>
         {/* form group */}
@@ -59,6 +61,6 @@ export default function GroupsEdit() {
           <Button>Təsdiqlə</Button>
         </div>
       </form>
-    </div>
+    </StyledContainer>
   );
 }

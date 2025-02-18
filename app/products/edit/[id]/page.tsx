@@ -1,11 +1,13 @@
 'use client';
+
 import Button from '@/app/general/components/Button';
+import { IProduct } from '@/app/redux/interfaces/general/product';
+import StyledContainer from '@/app/general/components/StyledContainer';
+import { groupsApi } from '@/app/redux/apis/GroupsApi';
 import { productsApi } from '@/app/redux/apis/ProductsApi';
-import { useParams } from 'next/navigation';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { IProduct } from '@/app/redux/interfaces/general/product';
-import { groupsApi } from '@/app/redux/apis/GroupsApi';
+import { useParams } from 'next/navigation';
 
 export default function ProductsEdit() {
   const params = useParams();
@@ -36,7 +38,7 @@ export default function ProductsEdit() {
   }, [response]);
 
   return (
-    <div className="flex flex-col bg-[#2b353dcd] w-full rounded p-4 text-white">
+    <StyledContainer>
       <h1 className="text-2xl">Qrup məlumatlarını dəyiş</h1>
       <form className="flex flex-wrap gap-x-5 gap-y-4 mt-5" onSubmit={handleSubmit(onSubmit)}>
         {/* form product */}
@@ -81,6 +83,6 @@ export default function ProductsEdit() {
           <Button>Təsdiqlə</Button>
         </div>
       </form>
-    </div>
+    </StyledContainer>
   );
 }

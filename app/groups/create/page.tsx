@@ -1,7 +1,9 @@
 'use client';
+
 import Button from '@/app/general/components/Button';
-import { groupsApi } from '@/app/redux/apis/GroupsApi';
 import { IGroup } from '@/app/redux/interfaces/general/group';
+import StyledContainer from '@/app/general/components/StyledContainer';
+import { groupsApi } from '@/app/redux/apis/GroupsApi';
 import { useForm } from 'react-hook-form';
 
 export default function GroupsCreate() {
@@ -15,7 +17,7 @@ export default function GroupsCreate() {
     });
   };
   return (
-    <div className="flex flex-col bg-[#2b353dcd] w-full rounded p-4 text-white">
+    <StyledContainer>
       <h1 className="text-2xl">Qrup əlavə et</h1>
       <form className="flex flex-wrap gap-x-5 gap-y-4 mt-5" onSubmit={handleSubmit(onSubmit)}>
         {/* form group */}
@@ -42,6 +44,6 @@ export default function GroupsCreate() {
           <Button>Təsdiqlə</Button>
         </div>
       </form>
-    </div>
+    </StyledContainer>
   );
 }

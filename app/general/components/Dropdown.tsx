@@ -1,9 +1,11 @@
 'use client';
+
 import { ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
+
 import Link from 'next/link';
+import { ReactNode } from 'react'; // Import ReactNode
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import { ReactNode } from 'react'; // Import ReactNode
 
 interface DropdownChild {
   label: string;
@@ -56,8 +58,8 @@ export default function Dropdown({ title, items, icon, route }: DropdownProps) {
               href={child.route}
               data-testid={`link-${child.route.toLowerCase()}`}
               className={`w-full text-left flex gap-5 items-center h-10 px-6  mt-1 text-lg
-                ${pathname === child.route ? 'bg-[#97979770]' : ''}
-                hover:bg-[#97979720] rounded-md`}
+                ${pathname === child.route ? 'bg-[#5a5a5a70]' : 'hover:bg-[#97979720]'}
+                 rounded-md`}
             >
               {child.icon && child.icon}
               <span>{child.label}</span>

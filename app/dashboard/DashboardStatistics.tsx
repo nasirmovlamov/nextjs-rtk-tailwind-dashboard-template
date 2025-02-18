@@ -6,6 +6,7 @@ import {
   UnderlineIcon,
   WifiIcon,
 } from '@heroicons/react/24/solid';
+
 import DashboardCard from './DashboardCard';
 
 export default function DashboardStatistics() {
@@ -55,17 +56,19 @@ export default function DashboardStatistics() {
   ];
 
   return (
-    <div className="flex  ">
-      <div className="w-full flex flex-wrap gap-5 mt-4 justify-between">
-        {assets.map((asset) => (
-          <DashboardCard
-            key={asset.id}
-            title={asset.name}
-            id={asset.id}
-            subtitle={asset.value}
-            icon={asset.icon}
-          />
-        ))}
+    <div className="flex">
+      <div className="w-full flex flex-wrap gap-5  justify-between">
+        <div className="w-full flex flex-wrap gap-5 justify-between bg-[#131313b2] p-5 rounded-md">
+          {assets.map((asset) => (
+            <DashboardCard
+              key={asset.id}
+              title={asset.name}
+              id={asset.id}
+              subtitle={asset.value}
+              icon={asset.icon}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

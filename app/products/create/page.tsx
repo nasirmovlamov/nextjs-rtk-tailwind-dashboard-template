@@ -1,8 +1,10 @@
 'use client';
+
 import Button from '@/app/general/components/Button';
+import { IProduct } from '@/app/redux/interfaces/general/product';
+import StyledContainer from '@/app/general/components/StyledContainer';
 import { groupsApi } from '@/app/redux/apis/GroupsApi';
 import { productsApi } from '@/app/redux/apis/ProductsApi';
-import { IProduct } from '@/app/redux/interfaces/general/product';
 import { useForm } from 'react-hook-form';
 
 export default function ProductsCreate() {
@@ -17,7 +19,7 @@ export default function ProductsCreate() {
     });
   };
   return (
-    <div className="flex flex-col bg-[#2b353dcd] w-full rounded p-4 text-white">
+    <StyledContainer>
       <h1 className="text-2xl">Vəsait əlavə et</h1>
       <form className="flex flex-wrap gap-x-5 gap-y-4 mt-5" onSubmit={handleSubmit(onSubmit)}>
         {/* form product */}
@@ -66,6 +68,6 @@ export default function ProductsCreate() {
           <Button>Təsdiqlə</Button>
         </div>
       </form>
-    </div>
+    </StyledContainer>
   );
 }

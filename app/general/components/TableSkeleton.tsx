@@ -18,8 +18,8 @@ export default function TableSkeleton({
           <thead>
             <tr>
               {Array.from({ length: columns }).map((_, i) => (
-                <th key={i} className="p-3 bg-gray-700 border border-gray-500">
-                  <div className="h-4 w-24 bg-gray-500 animate-pulse rounded"></div>
+                <th key={i} className="p-3 bg-[#131313b2] border border-black">
+                  <div className="h-4 w-24 bg-[#131313b2] animate-pulse rounded"></div>
                 </th>
               ))}
             </tr>
@@ -28,8 +28,8 @@ export default function TableSkeleton({
             {Array.from({ length: rows }).map((_, i) => (
               <tr key={i}>
                 {Array.from({ length: columns }).map((_, j) => (
-                  <td key={j} className="p-3 border border-gray-700">
-                    <div className="h-4 w-full bg-gray-500 animate-pulse rounded"></div>
+                  <td key={j} className="p-3 border border-black">
+                    <div className="h-4 w-full bg-[#131313b2] animate-pulse rounded"></div>
                   </td>
                 ))}
               </tr>

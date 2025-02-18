@@ -1,4 +1,6 @@
 'use client';
+
+import StyledContainer from '@/app/general/components/StyledContainer';
 import { productsApi } from '@/app/redux/apis/ProductsApi';
 import { useParams } from 'next/navigation';
 
@@ -8,7 +10,7 @@ export default function ProductsView() {
   const { data: response } = productsApi.useGetProductQuery(String(id));
 
   return (
-    <div className="flex flex-col bg-[#2b353dcd] w-full rounded p-4 text-white">
+    <StyledContainer>
       <h1 className="text-2xl">Vəsait məlumatları</h1>
       <form className="flex flex-wrap gap-x-5 gap-y-4 mt-5">
         {/* form product */}
@@ -35,6 +37,6 @@ export default function ProductsView() {
           </div>
         </div>
       </form>
-    </div>
+    </StyledContainer>
   );
 }
