@@ -1,10 +1,12 @@
-import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-// import { Provider } from "react-redux";
-import Wrapper from './general/components/Wrapper';
+
+import { Geist, Geist_Mono } from 'next/font/google';
+
+import AuthHandler from './general/components/AuthHandler';
 // import Sidebar from "./general/components/Sidebar";
 import Head from 'next/head';
-import AuthHandler from './general/components/AuthHandler';
+// import { Provider } from "react-redux";
+import Wrapper from './general/components/Wrapper';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -24,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Head>
-        <title>MN | Rabitə Təminatı Vasitələrinin İdarə Olunması Proqram Təminatı</title>
+        <title>Test | Example</title>
       </Head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Wrapper>

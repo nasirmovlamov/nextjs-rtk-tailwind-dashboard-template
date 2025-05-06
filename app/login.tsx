@@ -1,8 +1,9 @@
 'use client';
-import { useForm } from 'react-hook-form';
+
+import { RequestLogin } from './redux/interfaces/request/auth';
 import armyBg from '../public/army-bg.jpg';
 import { authApi } from './redux/apis/AuthApi';
-import { RequestLogin } from './redux/interfaces/request/auth';
+import { useForm } from 'react-hook-form';
 
 export default function Login() {
   const [login, { error, isLoading }] = authApi.useLoginMutation();

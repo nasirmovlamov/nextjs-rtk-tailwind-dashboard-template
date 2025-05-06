@@ -3,9 +3,9 @@
 // pages/401.js
 import Link from 'next/link';
 import { authApi } from '../redux/apis/AuthApi';
-import { useEffect } from 'react';
-import { getCookie } from '../utils/getCookie';
 import { deleteCookie } from '../utils/deleteCookie';
+import { getCookie } from '../utils/getCookie';
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function Unauthorized() {

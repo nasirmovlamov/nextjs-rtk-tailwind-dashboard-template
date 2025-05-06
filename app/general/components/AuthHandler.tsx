@@ -1,13 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import Header from './Header';
 import MainContent from '../MainContent';
 import PageLoader from './PageLoader';
 import Sidebar from './Sidebar';
 import { authApi } from '@/app/redux/apis/AuthApi';
-import bgImage from '../../assets/images/army-bg-2.jpg';
+import catImage from '../../assets/images/image.png';
 import { deleteCookie } from '@/app/utils/deleteCookie';
 import { getCookie } from '@/app/utils/getCookie';
 import { useAppSelector } from '@/app/redux/hooks';
@@ -15,6 +15,7 @@ import { useAppSelector } from '@/app/redux/hooks';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function AuthHandler({ children }: any) {
   const auth = useAppSelector((state) => state.auth);
+  const [isAuthActive, setIsAuthActive] = useState(false);
   const [getUser, { isLoading: isLoadingGetUser, isError: isErrorGetUser }] =
     authApi.useLazyGetUserQuery();
 
@@ -39,10 +40,18 @@ export default function AuthHandler({ children }: any) {
     }
   }, [isErrorGetUser]);
 
+  const isAuthenticated = useMemo(() => {
+    if (!isAuthActive) {
+      return true;
+    }else{
+      return !isLoadingGetUser && !awaiter && auth?.accessToken
+    }
+  }, [auth, isLoadingGetUser, awaiter]);
+
   return (
     <>
       {awaiter && <PageLoader />}
-      {!isLoadingGetUser && !awaiter && auth?.accessToken ? (
+      { isAuthenticated ? (
         <>
           <div
             className="absolute -z-10 left-0 top-0 w-full h-full bg-center bg-cover"
@@ -52,13 +61,14 @@ export default function AuthHandler({ children }: any) {
               left: 0,
               right: 0,
               bottom: 0,
-              backgroundImage: `url(${bgImage.src})`,
+              backgroundImage: `url(${catImage.src})`,
+              // background: "linear-gradient(90deg, rgba(227, 228, 231, 1) 0%, rgba(249, 235, 182, 1) 100%)"
             }}
           ></div>
           <div
             style={{
-              backgroundColor: 'rgba(0, 0, 0, 0.7)',
-              backdropFilter: 'blur(15px)',
+              backgroundColor: 'rgba(0, 0, 0, 0.4)',
+              backdropFilter: 'blur(3px)',
               position: 'fixed',
               backgroundPosition: 'center',
               top: 0,

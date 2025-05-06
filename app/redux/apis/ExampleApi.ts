@@ -1,8 +1,8 @@
-import { GenericResponse } from '../interfaces/response/response';
-import { createApi } from '@reduxjs/toolkit/query/react';
-import { axiosBaseQuery } from '../hooks';
 import { ENDPOINTS } from '@/app/consts/endpoints/endpoints';
 import { GenericPaginationResponse } from '../interfaces/response/response';
+import { GenericResponse } from '../interfaces/response/response';
+import { axiosBaseQuery } from '../hooks';
+import { createApi } from '@reduxjs/toolkit/query/react';
 import toast from 'react-hot-toast';
 
 /* this example api is boilerplate to increase speed of api creation */

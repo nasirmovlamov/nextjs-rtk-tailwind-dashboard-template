@@ -7,8 +7,10 @@ import {
   DocumentIcon,
   DocumentMinusIcon,
   DocumentTextIcon,
+  FolderOpenIcon,
   FolderPlusIcon,
   ListBulletIcon,
+  PencilSquareIcon,
   PlusCircleIcon,
   RadioIcon,
   ReceiptPercentIcon,
@@ -16,17 +18,20 @@ import {
   UsersIcon,
 } from '@heroicons/react/24/solid';
 import { useAppDispatch, useAppSelector } from '@/app/redux/hooks';
+import { useEffect, useState } from 'react';
 
 import { AuthSlice } from '@/app/redux/slices/AuthSlice';
 import Dropdown from './Dropdown';
 import Image from 'next/image';
 import Link from 'next/link';
 import { authApi } from '@/app/redux/apis/AuthApi';
-import mnLogo from '../../assets/images/mnlogo.png';
+import exampleLogo from '../../assets/images/logo.png';
 
 // Example using Heroicons
 
 export default function Sidebar() {
+  const [isMounted, setIsMounted] = useState(false);
+
   const appData = useAppSelector((state) => state.app);
   const dispatch = useAppDispatch();
   const [logout] = authApi.useLogoutMutation();
@@ -35,17 +40,23 @@ export default function Sidebar() {
     dispatch(AuthSlice.actions.setUnAuth());
   };
 
+  useEffect(() => {
+    setTimeout(() => setIsMounted(true), 200); // Delay to ensure smooth transition
+  }, []);
+
   return (
     <div
-      className={`text-white mt-2 font-medium ml-4 w-[260px] rounded-lg h-[calc(100vh-15px)] border-r border-lightgray p-3 box-border flex flex-col justify-between fixed bg-[#131313b2] shadow-lg border-none transition-all duration-500 ${
-        appData.sidebar.isVisible ? `-translate-x-[290px]` : 'translate-x-0'
-      }`}
+      className={`text-white mt-2 font-medium ml-4 w-[260px] rounded-lg h-[calc(100vh-15px)] pb-5
+      border-r border-lightgray p-3 box-border flex flex-col justify-between fixed 
+      bg-[#131313b2] shadow-lg border-none transition-transform duration-[700ms] ease-out 
+      ${!isMounted ? '-translate-x-[20px]' : 'translate-x-[0px]'}
+      ${appData.sidebar.isVisible ? '-translate-x-[290px]' : 'translate-x-0'}`}
     >
       <Link href="/">
         <div className="flex justify-between p-5 gap-5 h-24 mb-5">
           <div className="flex gap-5 items-center" id="sidebar-title">
-            <Image src={mnLogo.src} alt="Logo" width={`50`} height="4" />
-            <span className="text-xs font-bold ">AZƏRBAYCAN RESPUBLİKASI MÜDAFİƏ NAZİRLİYİ</span>
+            <Image src={exampleLogo.src} alt="Logo" width={`50`} height="4" />
+            <span className="text-xs font-bold ">Example</span>
           </div>
         </div>
       </Link>
@@ -69,100 +80,7 @@ export default function Sidebar() {
             ]}
           />
 
-          <Dropdown
-            title="Korpuslar"
-            icon={<BuildingLibraryIcon className="h-6 w-6" />}
-            items={[
-              {
-                label: 'siyahısı',
-                route: '/corps',
-                icon: <ListBulletIcon className="h-5 w-5" />, // If you have an icon
-              },
-              {
-                label: 'əlavə et',
-                route: '/corps/create',
-                icon: <PlusCircleIcon className="h-5 w-5" />, // If you have an icon
-              },
-            ]}
-          />
 
-          <Dropdown
-            title="Hərbi hissələr"
-            icon={<BuildingOffice2Icon className="h-6 w-6" />}
-            items={[
-              {
-                label: 'siyahısı',
-                route: '/brigades',
-                icon: <ListBulletIcon className="h-5 w-5" />, // If you have an icon
-              },
-              {
-                label: 'əlavə et',
-                route: '/brigades/create',
-                icon: <PlusCircleIcon className="h-5 w-5" />, // If you have an icon
-              },
-            ]}
-          />
-
-          <Dropdown
-            title="Qruplar"
-            icon={<RectangleGroupIcon className="h-6 w-6" />}
-            items={[
-              {
-                label: 'siyahısı',
-                route: '/groups',
-                icon: <ListBulletIcon className="h-5 w-5" />, // If you have an icon
-              },
-              {
-                label: 'əlavə et',
-                route: '/groups/create',
-                icon: <PlusCircleIcon className="h-5 w-5" />, // If you have an icon
-              },
-            ]}
-          />
-
-          <Dropdown
-            title="Vəsaitlər"
-            icon={<RadioIcon className="h-6 w-6" />}
-            items={[
-              {
-                label: 'siyahısı',
-                route: '/products',
-                icon: <ListBulletIcon className="h-5 w-5" />, // If you have an icon
-              },
-              {
-                label: 'əlavə et',
-                route: '/products/create',
-                icon: <PlusCircleIcon className="h-5 w-5" />, // If you have an icon
-              },
-            ]}
-          />
-
-          <Dropdown
-            title="Sənədlər"
-            icon={<DocumentIcon className="h-6 w-6" />}
-            items={[
-              {
-                label: 'naryadlar',
-                route: '/documents/shifts',
-                icon: <DocumentTextIcon className="h-5 w-5" />, // If you have an icon
-              },
-              {
-                label: 'mədaxillər',
-                route: '/documents/receipts',
-                icon: <FolderPlusIcon className="h-5 w-5" />, // If you have an icon
-              },
-              {
-                label: 'qaimələr',
-                route: '/documents/overheads',
-                icon: <ReceiptPercentIcon className="h-5 w-5" />, // If you have an icon
-              },
-              {
-                label: 'silinmələr',
-                route: '/documents/deletions',
-                icon: <DocumentMinusIcon className="h-5 w-5" />, // If you have an icon
-              },
-            ]}
-          />
         </div>
 
         <div className="w-full h-[0.5px] bg-[#d3d3d330] mt-auto"></div>
@@ -178,7 +96,7 @@ export default function Sidebar() {
         </div>
       </div>
 
-      <span className="text-[11px] text-center">Copyright © Proqram təminatı şöbəsi 2025</span>
+      <span className="text-[11px] text-center">Copyright © Example 2025</span>
     </div>
   );
 }

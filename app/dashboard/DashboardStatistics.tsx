@@ -14,45 +14,38 @@ export default function DashboardStatistics() {
     {
       id: 1,
       name: 'Server Rack',
-      value: '$8000',
+      value: '8000 ₼',
       status: 'Operational',
       icon: <ServerIcon width="25px" />, // Placeholder icon
     },
     {
       id: 2,
       name: 'Network',
-      value: '$2500',
+      value: '2500 ₼',
       status: 'Operational',
       icon: <GlobeAltIcon width="25px" />, // Placeholder icon
     },
     {
       id: 3,
       name: 'Firewall',
-      value: '$5000',
+      value: '5000 ₼',
       status: 'In Maintenance',
       icon: <FireIcon width="25px" />, // Placeholder icon
     },
     {
       id: 4,
       name: 'Database',
-      value: '$12000',
+      value: '12000 ₼',
       status: 'Operational',
       icon: <CircleStackIcon width="25px" />, // Placeholder icon
     },
     {
       id: 5,
       name: 'Web Server',
-      value: '$10000',
+      value: '10000 ₼',
       status: 'Operational',
       icon: <UnderlineIcon width="25px" />, // Placeholder icon
-    },
-    {
-      id: 7,
-      name: 'Rabitə cihazları',
-      value: '$3000',
-      status: 'Operational',
-      icon: <WifiIcon width="25px" />, // Placeholder icon
-    },
+    }
   ];
 
   return (

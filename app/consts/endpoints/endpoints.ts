@@ -5,8 +5,8 @@ const isProd = false;
 const apiVersion = '';
 
 const port = '8080';
-const localUrl = `http://172.22.111.140:${port}`;
-const previewUrl = `http://172.22.111.140:${port}`;
+const localUrl = `http://exampleurl:${port}`;
+const previewUrl = `http://exampleurl:${port}`;
 const url = isDev
   ? `${localUrl}/api${apiVersion ? `/${apiVersion}` : ''}`
   : isPreview
