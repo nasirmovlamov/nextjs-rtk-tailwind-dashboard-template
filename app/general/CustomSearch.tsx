@@ -19,7 +19,6 @@ export const CustomSearch: React.FC<CustomSearchProps> = ({ fetchData, searchTyp
     const timer = setTimeout(() => {
       setDebouncedSearchTerm(searchTerm);
     }, 500); // Delay for 500ms
-
     return () => clearTimeout(timer);
   }, [searchTerm]);
 

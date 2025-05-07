@@ -15,7 +15,7 @@ io.on('connection', (socket) => {
 
   // Example: Sending a notification to the connected client
   setInterval(() => {
-    socket.emit('newNotification', { message: 'Real-time update!', timestamp: new Date() });
+    socket.emit('newNotification', { message: 'Hi, Real-time update!', timestamp: new Date() });
   }, 3000); // Send a notification every 3 seconds
 
   socket.on('disconnect', () => {
