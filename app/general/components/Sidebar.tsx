@@ -85,19 +85,12 @@ export default function Sidebar() {
             icon={<UsersIcon className="h-6 w-6" />}
             items={[
               {
-                label: 'siyahısı',
+                label: 'bildirişlər',
                 route: '/users',
                 icon: <ListBulletIcon className="h-5 w-5" />, // If you have an icon
-              },
-              {
-                label: 'əlavə et',
-                route: '/users/create',
-                icon: <PlusCircleIcon className="h-5 w-5" />, // If you have an icon
-              },
+              }
             ]}
           />
-
-
         </div>
 
         <div className="w-full h-[0.5px] bg-[#d3d3d330] mt-auto"></div>
