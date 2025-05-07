@@ -86,7 +86,7 @@ export default function Sidebar() {
             items={[
               {
                 label: 'bildirişlər',
-                route: '/users',
+                route: '/socket-module',
                 icon: <ListBulletIcon className="h-5 w-5" />, // If you have an icon
               }
             ]}
